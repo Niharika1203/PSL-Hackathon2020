@@ -1,15 +1,20 @@
 predicates:
-  Knows/2: open
-  Likes/2: closed
-  Lived/2: closed
+  user/1: closed
+  item/1: closed
+  rating/2: open
+  similarItem/2: closed
+  similarUser/2: closed
 
 observations:
-  Knows : ../data/simple-acquaintances/0/eval/knows_obs.txt
-  Lived : ../data/simple-acquaintances/0/eval/lived_obs.txt
-  Likes : ../data/simple-acquaintances/0/eval/likes_obs.txt
+  user : ../data/simple-acquaintances/0/eval/user.txt
+  item : ../data/simple-acquaintances/0/eval/item.txt
+  rating : ../data/simple-acquaintances/0/eval/rating_obs.txt
+  similarItem : ../data/simple-acquaintances/0/eval/similarItem.txt
+  similarUser : ../data/simple-acquaintances/0/eval/similarUser.txt
+
 
 targets:
-  Knows : ../data/simple-acquaintances/0/eval/knows_targets.txt
+  rating : ../data/simple-acquaintances/0/eval/rating_uno.txt
 
 truth:
-  Knows : ../data/simple-acquaintances/0/eval/knows_truth.txt
+  rating : ../data/simple-acquaintances/0/eval/rating_obs.txt
