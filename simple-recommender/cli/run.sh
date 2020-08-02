@@ -6,7 +6,7 @@
 
 readonly PSL_VERSION='2.2.1'
 readonly JAR_PATH="./psl-cli-${PSL_VERSION}.jar"
-readonly BASE_NAME='simple-acquaintances'
+readonly BASE_NAME='simple-recommender'
 
 readonly ADDITIONAL_PSL_OPTIONS=''
 readonly ADDITIONAL_EVAL_OPTIONS='--infer --eval org.linqs.psl.evaluation.statistics.DiscreteEvaluator'
