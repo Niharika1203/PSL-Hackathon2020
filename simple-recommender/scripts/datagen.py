@@ -52,17 +52,17 @@ class DataGen() :
         ratingUnoFile = open(data_dir + "rating_new_uno.txt", "w+")
 
         f1 = obsFile.readlines()
-        for i in f1 :
+        for i in f1:
             row = i.split()
             row[2] = str((float(row[2])+10)/ 20)
-            row_add =  "  ".join(row)
+            row_add =  '\t'.join(row)
             ratingObsFile.write("%s\r\n" %(row_add))
 
         f2 = unobsFile.readlines()
         for i in f2 :
             row = i.split()
             row[2] = str((float(row[2])+10 )/ 20)
-            row_add =  "  ".join(row)
+            row_add =  '\t'.join(row)
             ratingUnoFile.write("%s\r\n" %(row_add))
 
 
@@ -91,7 +91,7 @@ class DataGen() :
 
 
         SimilarUserFile = open(data_dir + "/SimilarUser.txt","w+")
-        SimilarItemFile = open(data_dir + "/SimilarItems.txt", "w+")
+        SimilarItemFile = open(data_dir + "/SimilarItem.txt", "w+")
 
         # compute item-item similarity
         for i in range(numItem):
@@ -109,6 +109,25 @@ class DataGen() :
                     cosine_similarity = 0
                 SimilarUserFile.write("%s\t%s\t%f\n" %(i+1001,j+1001,cosine_similarity))
 
+    def generateTargetRating(self, unobsFnamePath) :
+        unobsFile = open(unobsFnamePath, "r")
+
+        cwd = os.getcwd()
+        parent_cwd = os.path.dirname(cwd)
+        data_dir = parent_cwd + "/data/simple-recommender/0/eval/"
+        #print(data_dir)
+
+        #ratingObsFile = open(data_dir + "rating_new_obs.txt","w+")
+        ratingTargetFile = open(data_dir + "rating_target.txt", "w+")
+
+
+        f2 = unobsFile.readlines()
+        for i in f2 :
+            row = i.split()
+            ratingTargetFile.write("%s\t%s\n" %(row[0], row[1]))
+
+
+
 
 dataObject = DataGen()
 
@@ -120,6 +139,7 @@ filename_uno = parent_cwd +'/data/simple-recommender/0/eval/rating_uno.txt'
 dataObject.generateUsersItems(filename_obs, filename_uno)
 dataObject.generateNewRating(filename_obs, filename_uno)
 dataObject.generateRatingMatrix(filename_obs)
+dataObject.generateTargetRating(filename_uno)
 
 
 
