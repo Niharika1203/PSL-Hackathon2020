@@ -1,13 +1,13 @@
 import os
 class DataGen() :
 
-    def users(self, obsFname, unobsFname) :
-        obsFile = open(obsFname, "r")
-        unobsFile = open(unobsFname, "r")
+    def users(self, parDir) :
+        obsFile = open(parDir+"rating_obs.txt", "r")
+        unobsFile = open(parDir+"rating_uno.txt", "r")
         userset = set()
         itemset = set()
-        usersFile = open("users.txt","w+")
-        itemsFile = open("items.txt", "w+")
+        usersFile = open(parDir+"users.txt","w+")
+        itemsFile = open(parDir+"items.txt", "w+")
 
         f1 = obsFile.readlines()
         for i in f1 :
@@ -29,8 +29,9 @@ class DataGen() :
 
 dataObject = DataGen()
 cur_path = os.getcwd()
-print(cur_path)
+# print(cur_path)
 os.chdir('../')
-new_path = os.getcwd() #os.path.relpath('../data/simple-recommender/0/eval/', cur_path)
-print(new_path)
-dataObject.users(new_path+"/data/simple-recommender/0/eval/rating_obs.txt", new_path+"/data/simple-recommender/0/eval/rating_uno.txt")
+new_path = os.getcwd()
+new_path += "/data/simple-recommender/0/eval/"
+# print(new_path)
+dataObject.users(new_path)
