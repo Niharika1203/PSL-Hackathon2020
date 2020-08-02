@@ -99,7 +99,7 @@ class DataGen() :
                 cosine_similarity = 1 - spatial.distance.cosine(userItemMatrix[i], userItemMatrix[j])
                 if cosine_similarity < 0:
                     cosine_similarity = 0
-                SimilarItemFile.write("%s\t%s\t%f\n" %(i,j,cosine_similarity))
+                SimilarItemFile.write("%s\t%s\t%f\n" %(i+1,j+1,cosine_similarity))
 
         # compute user-user similarity
         for i in range(numUser):
