@@ -1,0 +1,20 @@
+predicates:
+  user/1: closed
+  item/1: closed
+  rating/2: open
+  similarItem/2: closed
+  similarUser/2: closed
+
+observations:
+  user : ../data/simple-recommender/0/eval/users.txt
+  item : ../data/simple-recommender/0/eval/items.txt
+  rating : ../data/simple-recommender/0/eval/rating_new_obs.txt
+  similarItem : ../data/simple-recommender/0/eval/SimilarItem.txt
+  similarUser : ../data/simple-recommender/0/eval/SimilarUser.txt
+
+
+targets:
+  rating : ../data/simple-recommender/0/eval/rating_target.txt
+
+truth:
+  rating : ../data/simple-recommender/0/eval/rating_new_uno.txt
