@@ -6,15 +6,15 @@ predicates:
   similarUser/2: closed
 
 observations:
-  user : ../data/simple-recommender/0/eval/user.txt
-  item : ../data/simple-recommender/0/eval/item.txt
-  rating : ../data/simple-recommender/0/eval/rating_obs.txt
+  user : ../data/simple-recommender/0/eval/users.txt
+  item : ../data/simple-recommender/0/eval/items.txt
+  rating : ../data/simple-recommender/0/eval/rating_new_obs.txt
   similarItem : ../data/simple-recommender/0/eval/similarItem.txt
   similarUser : ../data/simple-recommender/0/eval/similarUser.txt
 
 
 targets:
-  rating : ../data/simple-recommender/0/eval/rating_uno.txt
+  rating : ../data/simple-recommender/0/eval/rating_new_uno.txt
 
 truth:
-  rating : ../data/simple-recommender/0/eval/rating_obs.txt
+  rating : ../data/simple-recommender/0/eval/rating_new_obs.txt
