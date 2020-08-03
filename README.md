@@ -4,6 +4,7 @@
 
 In this work, we attempt to predict the rating of users based on user-user similarity and item-item similarity for a synthetic dataset. The two original txt files are:  
 `rating_obs.txt`: it contains all the observed ratings;
+
 `rating_target.txt`: it contains all the unobserved ratings.
 
 
