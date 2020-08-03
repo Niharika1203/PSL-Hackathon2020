@@ -1,6 +1,4 @@
-# PSL-Hackathon2020
-
-### Simple Recommender System
+# PSL-Hackathon2020 -- Simple Recommender System
 
 ## Problem & Dataset
 
@@ -39,13 +37,14 @@ Specifically the rules are:
 
 ## How to generate different predicates
 To generate different txt files for different predictes, go to the script folder and run datagen.py file. It will automatically generate the following files in the "../data/simple-recommender/0/eval" folder:
-items.txt
-rating_new_obs.txt
-rating_new_uno.txt
-rating_uno.txt
-SimilarItem.txt
-SimilarUser.txt
-users.txt
+* items.txt
+* users.txt
+* rating_new_obs.txt
+* rating_new_uno.txt
+* rating_uno.txt
+* SimilarItem.txt
+* SimilarUser.txt
+
 
 
 ## How to run the inference
