@@ -42,14 +42,13 @@ To generate different txt files for different predictes, go to the script folder
 * users.txt
 * rating_new_obs.txt
 * rating_new_uno.txt
-* rating_uno.txt
 * SimilarItem.txt
 * SimilarUser.txt
 
 
 
 ## How to run the inference
-go to the cli file and type ./run.sh, it should automatically generate the rating results in a folder named infered-predicate. It will also automatically generate evaluation results including Accuracy, F1, Positive Class Precision, Positive Class Recall, Negative Class Precision, Negative Class Recall.
+go to the cli folder and do `./run.sh`, it will automatically generate the rating results in a folder named `infered-predicate`. It will also automatically generate evaluation results including Accuracy, F1, Positive Class Precision, Positive Class Recall, Negative Class Precision, Negative Class Recall.
 
 
 
