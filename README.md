@@ -12,7 +12,7 @@ In this work, we attempt to predict the rating of users based on user-user simil
 ## Model description
 1. simple-recommender is the full PSL model which contain item-item similarity rule, user-user similarity rule, and rating similarity rules.
 Specifically the rules are:
-
+```
 // User similarity
 
 1.0: similarUser(U1, U2) & rating(U1, I1) ->  rating(U2, I1) ^2
@@ -24,14 +24,14 @@ Specifically the rules are:
 // Rating similarity 
 
 1.0: similarUser(U1,U2) & similarItem(I1, I2) & rating(U1, I1) ->  rating(U2, I2) ^2
-
+```
 
 2. simple-recommender_simple contains only the item-item similarity rule.
-
+```
 // Item similarity 
 
 1.0: similarItem(I1, I2)  & rating(U1, I1) ->  rating(U1, I2) ^2
-
+```
 
 3. simple-recommender_small contains a even small dataset which we use for debugging purposes.
 
