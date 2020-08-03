@@ -4,7 +4,7 @@ from scipy import spatial
 
 class DataGen() :
 
-    # generate user.txt and item.txt 
+    # generate user.txt and item.txt
     def generateUsersItems(self, obsFnamePath, unobsFnamePath) :
         obsFile = open(obsFnamePath, "r")
         unobsFile = open(unobsFnamePath, "r")
@@ -54,18 +54,20 @@ class DataGen() :
         f1 = obsFile.readlines()
         for i in f1:
             row = i.split()
-            row[2] = str((float(row[2])+10)/ 20)
-            row_add =  '\t'.join(row)
-            ratingObsFile.write("%s\r\n" %(row_add))
+            val = (float(row[2])+10)/ 20
+            if val >= 0.5 :
+                row[2] = str(val)
+                row_add =  '\t'.join(row)
+                ratingObsFile.write("%s\r\n" %(row_add))
 
         f2 = unobsFile.readlines()
         for i in f2 :
             row = i.split()
-            row[2] = str((float(row[2])+10 )/ 20)
-            row_add =  '\t'.join(row)
-            ratingUnoFile.write("%s\r\n" %(row_add))
-
-
+            val = (float(row[2])+10)/ 20
+            if val >= 0.5 :
+                row[2] = str(val)
+                row_add =  '\t'.join(row)
+                ratingUnoFile.write("%s\r\n" %(row_add))
 
         # generate user_item matrix for rating matrix
     def generateRatingMatrix(self, obsFnamePath):
@@ -81,7 +83,7 @@ class DataGen() :
         userItemMatrix_df = Rating.pivot_table(index='itemID',columns='userID',values='rating').fillna(0)
         #print(userItemMatrix_df)
 
-        # generate the rating matrix: 
+        # generate the rating matrix:
         # each row represents an item
         # each col represents a user
         userItemMatrix = userItemMatrix_df.to_numpy()
@@ -140,6 +142,3 @@ dataObject.generateUsersItems(filename_obs, filename_uno)
 dataObject.generateNewRating(filename_obs, filename_uno)
 dataObject.generateRatingMatrix(filename_obs)
 dataObject.generateTargetRating(filename_uno)
-
-
-
