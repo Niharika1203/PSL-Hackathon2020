@@ -55,7 +55,7 @@ class DataGen() :
         for i in f1:
             row = i.split()
             val = (float(row[2])+10)/ 20
-            if val >= 0.75 :
+            if val >= 0.8 :
                 row[2] = str(val)
                 row_add =  '\t'.join(row)
                 ratingObsFile.write("%s\r\n" %(row_add))
@@ -64,7 +64,7 @@ class DataGen() :
         for i in f2 :
             row = i.split()
             val = (float(row[2])+10)/ 20
-            if val >= 0.75 :
+            if val >= 0.8 :
                 row[2] = str(val)
                 row_add =  '\t'.join(row)
                 ratingUnoFile.write("%s\r\n" %(row_add))
