@@ -3,8 +3,8 @@
 ## Problem & Dataset
 
 In this work, we attempt to predict the rating of users based on user-user similarity and item-item similarity for a synthetic dataset. The two original txt files are:  
-*rating_obs.txt*: it contains all the observed ratings;
-*rating_target.txt*: it contains all the unobserved ratings.
+`rating_obs.txt`: it contains all the observed ratings;
+`rating_target.txt`: it contains all the unobserved ratings.
 
 
 
@@ -36,7 +36,7 @@ Specifically the rules are:
 3. simple-recommender_small contains a even small dataset which we use for debugging purposes.
 
 ## How to generate different predicates
-To generate different txt files for different predictes, go to the script folder and run datagen.py file. It will automatically generate the following files in the "../data/simple-recommender/0/eval" folder:
+To generate different txt files for different predictes, go to the script folder and run `datagen.py` file. It will automatically generate the following files in the `../data/simple-recommender/0/eval` folder:
 * items.txt
 * users.txt
 * rating_new_obs.txt
