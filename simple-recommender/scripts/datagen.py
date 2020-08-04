@@ -124,10 +124,16 @@ class DataGen() :
         f2 = unobsFile.readlines()
         for i in f2 :
             row = i.split()
-            ratingTargetFile.write("%s\t%s\n" %(row[0], row[1]))
+            ratingTargetFile.write("%s\t%s\n" %(row[0], row[1]) )
 
-
-
+    def makeRatingPrior(self, defaultval ):
+        cwd = os.getcwd()
+        #print(cwd)
+        parent_cwd = os.path.dirname(cwd)
+        data_dir = parent_cwd + "/data/simple-recommender/0/eval"
+        val = float(defaultval)
+        ratingPriorFile = open(data_dir + "/rating_prior.txt","w+")
+        ratingPriorFile.write("%f\t%f\n" %(0, val) )
 
 dataObject = DataGen()
 
@@ -140,3 +146,4 @@ dataObject.generateUsersItems(filename_obs, filename_uno)
 dataObject.generateNewRating(filename_obs, filename_uno)
 dataObject.generateRatingMatrix(filename_obs)
 dataObject.generateTargetRating(filename_uno)
+dataObject.makeRatingPrior(0.5)

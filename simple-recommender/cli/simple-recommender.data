@@ -4,6 +4,7 @@ predicates:
   rating/2: open
   similarItem/2: closed
   similarUser/2: closed
+  RatingPrior/1: closed
 
 observations:
   user : ../data/simple-recommender/0/eval/users.txt
@@ -11,7 +12,7 @@ observations:
   rating : ../data/simple-recommender/0/eval/rating_new_obs.txt
   similarItem : ../data/simple-recommender/0/eval/SimilarItem.txt
   similarUser : ../data/simple-recommender/0/eval/SimilarUser.txt
-
+  RatingPrior: ../data/jester/0/learn/rating_prior.txt
 
 targets:
   rating : ../data/simple-recommender/0/eval/rating_target.txt
