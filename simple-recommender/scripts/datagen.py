@@ -55,19 +55,17 @@ class DataGen() :
         for i in f1:
             row = i.split()
             val = (float(row[2])+10)/ 20
-            if val >= 0.8 :
-                row[2] = str(val)
-                row_add =  '\t'.join(row)
-                ratingObsFile.write("%s\r\n" %(row_add))
+            row[2] = str(val)
+            row_add =  '\t'.join(row)
+            ratingObsFile.write("%s\r\n" %(row_add))
 
         f2 = unobsFile.readlines()
         for i in f2 :
             row = i.split()
             val = (float(row[2])+10)/ 20
-            if val >= 0.8 :
-                row[2] = str(val)
-                row_add =  '\t'.join(row)
-                ratingUnoFile.write("%s\r\n" %(row_add))
+            row[2] = str(val)
+            row_add =  '\t'.join(row)
+            ratingUnoFile.write("%s\r\n" %(row_add))
 
         # generate user_item matrix for rating matrix
     def generateRatingMatrix(self, obsFnamePath):
@@ -99,17 +97,17 @@ class DataGen() :
         for i in range(numItem):
             for j in range(numItem):
                 cosine_similarity = 1 - spatial.distance.cosine(userItemMatrix[i], userItemMatrix[j])
-                if cosine_similarity < 0:
-                    cosine_similarity = 0
-                SimilarItemFile.write("%s\t%s\t%f\n" %(i+1,j+1,cosine_similarity))
+                if cosine_similarity > 0.15 :
+                    #cosine_similarity = 0
+                    SimilarItemFile.write("%s\t%s\t%f\n" %(i+1,j+1, cosine_similarity))
 
         # compute user-user similarity
         for i in range(numUser):
             for j in range(numUser):
                 cosine_similarity = 1 - spatial.distance.cosine(userItemMatrix[:,i], userItemMatrix[:,j])
-                if cosine_similarity < 0:
-                    cosine_similarity = 0
-                SimilarUserFile.write("%s\t%s\t%f\n" %(i+1001,j+1001,cosine_similarity))
+                if cosine_similarity > 0.1 :
+                    #cosine_similarity = 0
+                    SimilarUserFile.write("%s\t%s\t%f\n" %(i+1001,j+1001,cosine_similarity))
 
     def generateTargetRating(self, unobsFnamePath) :
         unobsFile = open(unobsFnamePath, "r")
