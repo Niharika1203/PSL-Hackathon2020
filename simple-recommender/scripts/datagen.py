@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 from scipy import spatial
+import collections
 
 class DataGen() :
 
@@ -8,7 +9,7 @@ class DataGen() :
     def generateUsersItems(self, obsFnamePath, unobsFnamePath) :
         obsFile = open(obsFnamePath, "r")
         unobsFile = open(unobsFnamePath, "r")
-        userSet = set()
+        userdict = collections.defaultdict(list)
         itemsSet = set()
 
         cwd = os.getcwd()
@@ -18,21 +19,23 @@ class DataGen() :
 
         usersFile = open(data_dir + "/users.txt","w+")
         itemsFile = open(data_dir + "/items.txt", "w+")
+        averageFile = open(data_dir + "/AvgUserRating.txt", "w+" )
 
         f_obs = obsFile.readlines()
         for i in f_obs:
             row = i.split()
-            userSet.add(row[0])
+            userdict[row[0]].append( (float(row[2])+10)/ 20 )
             itemsSet.add(row[1])
 
         f_uno = unobsFile.readlines()
         for i in f_uno:
             row = i.split()
-            userSet.add(row[0])
+            userdict[row[0]].append( (float(row[2])+10)/ 20 )
             itemsSet.add(row[1])
         # generate users.txt
-        for i in userSet:
+        for i in userdict.keys() :
             usersFile.write("%s\r\n" %(i))
+            averageFile.write("%s\t%f\n" %(i, (sum(userdict[i])/len(userdict[i])) ) )
         # generate item.txt
         for i in itemsSet:
             itemsFile.write("%s\r\n" %(i))
@@ -126,14 +129,16 @@ class DataGen() :
             row = i.split()
             ratingTargetFile.write("%s\t%s\n" %(row[0], row[1]) )
 
-    def makeRatingPrior(self, defaultval ):
-        cwd = os.getcwd()
-        #print(cwd)
-        parent_cwd = os.path.dirname(cwd)
-        data_dir = parent_cwd + "/data/simple-recommender/0/eval"
-        val = float(defaultval)
-        ratingPriorFile = open(data_dir + "/rating_prior.txt","w+")
-        ratingPriorFile.write("%f\t%f\n" %(0, val) )
+
+    # def makeRatingPrior(self, defaultval ):
+    #     cwd = os.getcwd()
+    #     #print(cwd)
+    #     parent_cwd = os.path.dirname(cwd)
+    #     data_dir = parent_cwd + "/data/simple-recommender/0/eval"
+    #     val = float(defaultval)
+    #     ratingPriorFile = open(data_dir + "/rating_prior.txt","w+")
+    #     ratingPriorFile.write("%f\t%f\n" %(0, val) )
+
 
 dataObject = DataGen()
 
@@ -146,4 +151,4 @@ dataObject.generateUsersItems(filename_obs, filename_uno)
 dataObject.generateNewRating(filename_obs, filename_uno)
 dataObject.generateRatingMatrix(filename_obs)
 dataObject.generateTargetRating(filename_uno)
-dataObject.makeRatingPrior(0.5)
+# dataObject.makeRatingPrior(0.5)

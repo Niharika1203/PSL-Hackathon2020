@@ -11,5 +11,4 @@
 // 1.0: similarUser(U1,U2) & similarItem(I1, I2) & rating(U1, I1) ->  rating(U2, I2) ^2
 
 // Prior
-1.0:  user(U) & RatingPrior('0') & item(I) >> rating(U, I) ^2
-1.0:  rating(U, I) >> RatingPrior('0') ^2
+1.0: rating(U,I) = AvgUserRating(U)
