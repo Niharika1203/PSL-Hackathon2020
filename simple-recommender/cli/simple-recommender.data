@@ -1,12 +1,10 @@
 predicates:
-
   user/1: closed
   AvgUserRating/1 : closed
   item/1: closed
   rating/2: open
   similarItem/2: closed
   similarUser/2: closed
-  RatingPrior/1: closed
 
 observations:
   user : ../data/simple-recommender/0/eval/users.txt
