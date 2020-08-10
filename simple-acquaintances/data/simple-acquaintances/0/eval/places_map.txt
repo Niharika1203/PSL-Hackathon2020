@@ -1,5 +1,0 @@
-0	Santa Cruz
-1	Maryland
-2	Seattle
-3	Los Gatos
-4	Los Altos
