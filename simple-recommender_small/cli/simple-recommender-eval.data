@@ -1,5 +1,6 @@
 predicates:
   user/1: closed
+  AvgUserRating/1 : closed
   item/1: closed
   rating/2: open
   similarItem/2: closed
@@ -11,7 +12,7 @@ observations:
   rating : ../data/simple-recommender/0/eval/rating_new_obs.txt
   similarItem : ../data/simple-recommender/0/eval/SimilarItem.txt
   similarUser : ../data/simple-recommender/0/eval/SimilarUser.txt
-
+  AvgUserRating : ../data/simple-recommender/0/eval/AvgUserRating.txt
 
 targets:
   rating : ../data/simple-recommender/0/eval/rating_target.txt
