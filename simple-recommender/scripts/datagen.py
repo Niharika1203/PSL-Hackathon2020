@@ -2,20 +2,22 @@ import os
 import pandas as pd
 from scipy import spatial
 import collections
+import os
+
 
 class DataGen() :
 
     # generate user.txt and item.txt
-    def generateUsersItems(self, obsFnamePath, unobsFnamePath) :
+    def generateUsersItems(self, data_dir):
+
+        obsFnamePath = data_dir + "/rating_obs.txt"
+        unobsFnamePath = data_dir + "/rating_uno.txt"
+
         obsFile = open(obsFnamePath, "r")
         unobsFile = open(unobsFnamePath, "r")
         userdict = collections.defaultdict(list)
         itemsSet = set()
 
-        cwd = os.getcwd()
-        parent_cwd = os.path.dirname(cwd)
-        data_dir = parent_cwd + "/data/simple-recommender/0/eval"
-        #print(data_dir)
 
         usersFile = open(data_dir + "/users.txt","w+")
         itemsFile = open(data_dir + "/items.txt", "w+")
@@ -41,18 +43,17 @@ class DataGen() :
             itemsFile.write("%s\r\n" %(i))
 
 
-    def generateNewRating(self, obsFnamePath, unobsFnamePath) :
+    def generateNewRating(self, data_dir) :
+
+        obsFnamePath = data_dir + "/rating_obs.txt"
+        unobsFnamePath = data_dir + "/rating_uno.txt"
+
         obsFile = open(obsFnamePath, "r")
         unobsFile = open(unobsFnamePath, "r")
 
-        cwd = os.getcwd()
-        parent_cwd = os.path.dirname(cwd)
-        data_dir = parent_cwd + "/data/simple-recommender/0/eval/"
-        #print(data_dir)
 
-
-        ratingObsFile = open(data_dir + "rating_new_obs.txt","w+")
-        ratingUnoFile = open(data_dir + "rating_new_uno.txt", "w+")
+        ratingObsFile = open(data_dir + "/rating_new_obs.txt","w+")
+        ratingUnoFile = open(data_dir + "/rating_new_uno.txt", "w+")
 
         f1 = obsFile.readlines()
         for i in f1:
@@ -71,11 +72,9 @@ class DataGen() :
             ratingUnoFile.write("%s\r\n" %(row_add))
 
         # generate user_item matrix for rating matrix
-    def generateRatingMatrix(self, obsFnamePath):
-        cwd = os.getcwd()
-        #print(cwd)
-        parent_cwd = os.path.dirname(cwd)
-        data_dir = parent_cwd + "/data/simple-recommender/0/eval"
+    def generateRatingMatrix(self, data_dir):
+
+        obsFnamePath = data_dir + "/rating_obs.txt"
 
         # get the rating dataframe
         Rating = pd.read_csv(obsFnamePath, sep='\t')
@@ -112,16 +111,13 @@ class DataGen() :
                     #cosine_similarity = 0
                     SimilarUserFile.write("%s\t%s\t%f\n" %(i+1001,j+1001,cosine_similarity))
 
-    def generateTargetRating(self, unobsFnamePath) :
+    def generateTargetRating(self, data_dir) :
+
+        unobsFnamePath = data_dir + "/rating_uno.txt"
+
         unobsFile = open(unobsFnamePath, "r")
 
-        cwd = os.getcwd()
-        parent_cwd = os.path.dirname(cwd)
-        data_dir = parent_cwd + "/data/simple-recommender/0/eval/"
-        #print(data_dir)
-
-        #ratingObsFile = open(data_dir + "rating_new_obs.txt","w+")
-        ratingTargetFile = open(data_dir + "rating_target.txt", "w+")
+        ratingTargetFile = open(data_dir + "/rating_target.txt", "w+")
 
 
         f2 = unobsFile.readlines()
@@ -130,25 +126,17 @@ class DataGen() :
             ratingTargetFile.write("%s\t%s\n" %(row[0], row[1]) )
 
 
-    # def makeRatingPrior(self, defaultval ):
-    #     cwd = os.getcwd()
-    #     #print(cwd)
-    #     parent_cwd = os.path.dirname(cwd)
-    #     data_dir = parent_cwd + "/data/simple-recommender/0/eval"
-    #     val = float(defaultval)
-    #     ratingPriorFile = open(data_dir + "/rating_prior.txt","w+")
-    #     ratingPriorFile.write("%f\t%f\n" %(0, val) )
+
+onlyfiles = next(os.walk("../data/hackathon/"))[1] #dir is your directory path as string
+#print (len(onlyfiles))
 
 
-dataObject = DataGen()
+for i in range(len(onlyfiles)):
+    dataObject = DataGen()
+    data_dir = "../data/hackathon/" + str(i)
 
-cwd = os.getcwd()
-parent_cwd = os.path.dirname(cwd)
-filename_obs = parent_cwd + '/data/simple-recommender/0/eval/rating_obs.txt'
-filename_uno = parent_cwd +'/data/simple-recommender/0/eval/rating_uno.txt'
+    dataObject.generateUsersItems(data_dir)
+    dataObject.generateNewRating(data_dir)
+    dataObject.generateRatingMatrix(data_dir)
+    dataObject.generateTargetRating(data_dir)
 
-dataObject.generateUsersItems(filename_obs, filename_uno)
-dataObject.generateNewRating(filename_obs, filename_uno)
-dataObject.generateRatingMatrix(filename_obs)
-dataObject.generateTargetRating(filename_uno)
-# dataObject.makeRatingPrior(0.5)
